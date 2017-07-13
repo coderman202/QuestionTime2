@@ -1,0 +1,10 @@
+PRAGMA foreign_keys = OFF;
+
+DROP TABLE IF EXISTS QuestionQuiz;
+DROP TABLE IF EXISTS Quiz;
+DROP TABLE IF EXISTS Options;
+DROP TABLE IF EXISTS Question;
+DROP TABLE IF EXISTS Topic;
+DROP TABLE IF EXISTS QuestionType;
+
+PRAGMA foreign_keys = ON;

@@ -1,0 +1,50 @@
+<resources xmlns:tools="http://schemas.android.com/tools"
+           xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">Question Time</string>
+
+    <string name="welcome">Welcome to Question Time!</string>
+
+    <string name="instructions">
+        Press here to choose your quiz and try get them all right. Good luck!
+    </string>
+
+    <string name="final_score">
+        You scored <xliff:g name="score_count" example="7">%d</xliff:g>
+        out of <xliff:g name="question_count" example="10">%d</xliff:g>
+    </string>
+
+    <string name="play_again">Choose another quiz and play again?</string>
+
+    <string name="question_mark">\?</string>
+    <string name="num_questions"><xliff:g name="question_count" example="10">%d</xliff:g>\nQuestions</string>
+
+    <!--PLACEHOLDER STRINGS-->
+    <string name="placeholder_quiz_name">Sports Quiz</string>
+    <string name="placeholder_num_questions">10\nQuestions</string>
+    <string name="placeholder_question">What is the highest mountain in China?</string>
+    <string name="placeholes_answer">Mount Olympus</string>
+
+    <!--STRINGS FOR DEALING WITH EXCEPTIONS -->
+    <string name="url_exception">Problem with the request URL</string>
+    <string name="response_code_exception" tools:ignore="PluralsCandidate">
+        Error: <xliff:g name="response_code">%d</xliff:g> response code received
+    </string>
+    <string name="json_exception">Problem retrieving JSON correctly</string>
+    <string name="parse_exception">Invalid date or problem with date formatting</string>
+    <string name="http_request_exception">HTTP request error</string>
+    <string name="no_network_connection">
+        Error. No network connection or unable to connect to network.
+    </string>
+    <string name="null_pointer_exception">Error. No response code found.</string>
+    <string name="keyboard_hide_exception">Error hiding keyboard</string>
+    <string name="malformed_url_exception">Problem with the thumbnail URL</string>
+    <string name="io_exception">Unknown IO exception</string>
+    <string name="title_activity_quiz">QuizActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!--CONTENT DESCRIPTION STRINGS-->
+    <string name="submit_button">Press this button to submit your answers</string>
+
+</resources>

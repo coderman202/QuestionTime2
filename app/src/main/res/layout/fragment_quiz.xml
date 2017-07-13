@@ -1,0 +1,57 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/standard_layout_margin"
+    android:orientation="vertical"
+    android:weightSum="12"
+    tools:context="com.example.android.questiontime2.QuizActivity$PlaceholderFragment">
+
+    <TextView
+        style="@style/OptionsStyle.QuestionStyle"
+        android:id="@+id/question"
+        android:layout_alignParentTop="true"
+        tools:text="@string/placeholder_question"/>
+
+    <RadioGroup
+        android:id="@+id/options_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <RadioButton
+            android:id="@+id/option1"
+            style="@style/OptionsStyle"
+            tools:text="@string/placeholes_answer"/>
+        <RadioButton
+            android:id="@+id/option2"
+            style="@style/OptionsStyle"
+            tools:text="@string/placeholes_answer"/>
+        <RadioButton
+            android:id="@+id/option3"
+            style="@style/OptionsStyle"
+            tools:text="@string/placeholes_answer"/>
+        <RadioButton
+            android:id="@+id/option4"
+            style="@style/OptionsStyle"
+            tools:text="@string/placeholes_answer"/>
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/submit_button"
+        android:src="@drawable/submit"
+        android:contentDescription="@string/submit_button"
+        android:layout_above="@+id/view"
+        android:layout_alignParentEnd="true"
+        style="@style/SubmitButtonStyle"/>
+
+    <!--View placed to ensure the submit button is not off screen.-->
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:padding="@dimen/fab_margin"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

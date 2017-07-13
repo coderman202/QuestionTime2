@@ -1,0 +1,90 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:textAppearance">@style/StandardFontStyle</item>
+    </style>
+
+    <!--Base font style-->
+    <style name="StandardFontStyle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:typeface">monospace</item>
+        <item name="android:textColor">@color/base_font_color</item>
+    </style>
+
+    <style name="QuizIconStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/StandardFontStyle</item>
+        <item name="android:textColor">@color/white_font_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/quiz_item_text_size</item>
+        <item name="android:layout_gravity">start|center_vertical</item>
+        <item name="android:padding">@dimen/quiz_list_item_view_padding</item>
+        <item name="android:background">@drawable/question_circle</item>
+    </style>
+
+    <style name="QuizItemStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">3.8</item>
+        <item name="android:textSize">@dimen/quiz_item_text_size</item>
+        <item name="android:layout_gravity">center|center_vertical</item>
+        <item name="android:padding">@dimen/quiz_list_item_view_padding</item>
+        <item name="android:textAppearance">@style/StandardFontStyle</item>
+    </style>
+
+    <style name="NumQuestionStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/quiz_list_item_view_padding</item>
+        <item name="android:textSize">@dimen/quiz_list_item_num_questions_text_size</item>
+        <item name="android:layout_gravity">center_vertical|end</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAppearance">@style/StandardFontStyle</item>
+    </style>
+
+    <style name="OptionsStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:textSize">@dimen/option_text_size</item>
+        <item name="android:paddingTop">@dimen/radio_button_padding</item>
+        <item name="android:paddingBottom">@dimen/radio_button_padding</item>
+        <item name="android:textAppearance">@style/StandardFontStyle</item>
+    </style>
+
+    <style name="OptionsStyle.QuestionStyle">
+        <item name="android:textSize">@dimen/question_text_size</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/options_margin_bottom</item>
+    </style>
+
+    <style name="WelcomeScreenStyle">
+        <item name="android:textAppearance">@style/StandardFontStyle</item>
+        <item name="android:textSize">@dimen/question_text_size</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/quiz_list_item_view_padding</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="SubmitButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/fab_margin</item>
+    </style>
+
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/standard_layout_margin"
+    tools:context="com.example.android.questiontime2.MainActivity">
+
+    <TextView
+        style="@style/WelcomeScreenStyle"
+        android:id="@+id/welcome"
+        android:text="@string/welcome"/>
+
+    <TextView
+        style="@style/WelcomeScreenStyle"
+        android:id="@+id/open_quiz_list"
+        android:text="@string/instructions"
+        android:textColor="@color/white_font_color"
+        android:background="@color/button_color"
+        android:layout_centerInParent="true"
+        android:drawableEnd="@drawable/play"/>
+</RelativeLayout>

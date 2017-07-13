@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#311B92</color>
+    <color name="colorPrimaryDark">#512DA8</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBackground">#F3EFF5</color>
+
+    <color name="base_font_color">#000000</color>
+    <color name="white_font_color">#FFFFFF</color>
+
+    <color name="button_color">#1A237E</color>
+
+    <!--Selection of random colours for the quiz icon-->
+    <color name="circle1">#43A047</color>
+    <color name="circle2">#D81B60</color>
+    <color name="circle3">#FF9800</color>
+    <color name="circle4">#304FFE</color>
+    <color name="circle5">#DD2C00</color>
+    <color name="circle6">#37474F</color>
+    <color name="circle7">#6200EA</color>
+    <color name="circle8">#5D4037</color>
+    <color name="circle9">#FFEA00</color>
+    <color name="circle10">#00BFA5</color>
+    <color name="circle11">#18FFFF</color>
+    <color name="circle12">#64DD17</color>
+</resources>
