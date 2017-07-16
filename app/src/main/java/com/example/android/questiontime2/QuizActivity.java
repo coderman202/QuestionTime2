@@ -22,6 +22,8 @@ import android.widget.TextView;
 import com.example.android.questiontime2.adapters.QuizQuestionPagerAdapter;
 import com.example.android.questiontime2.model.Question;
 import com.example.android.questiontime2.model.Quiz;
+import com.example.android.questiontime2.model.Results;
+import com.example.android.questiontime2.utilities.QuizUtilities;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,7 +70,13 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         Bundle bundle = getIntent().getExtras();
         quiz = bundle.getParcelable("Quiz");
 
+        // Shuffle all the questions and their options up.
         questionList = quiz.getQuestionList();
+        Collections.shuffle(questionList);
+        QuizUtilities.shuffleAllQuestionsOptions(questionList);
+
+        // Set the default answer to be changed when an option is selected in the radio group.
+        while(answerList.size() < questionList.size()) answerList.add("No answer");
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.quiz_container);
@@ -147,12 +155,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
             ButterKnife.bind(this, rootView);
 
-            // Set the default answer to be changed when an option is selected in the radio group.
-            answerList.add(sectionNumber - 1, "No answer");
-
             Question currentQuestion = questionList.get(sectionNumber - 1);
             final List<String> options = currentQuestion.getOptions();
-            Collections.shuffle(options);
 
             for(int i = 0; i < options.size(); i++) {
                 RadioButton option = (RadioButton) optionsGroup.getChildAt(i);
@@ -197,14 +201,14 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         public void onClick(View view){
             switch (view.getId()){
                 case R.id.submit_button:
+                    ArrayList<Results> resultsList = new ArrayList<>();
                     for (int i = 0; i < questionList.size(); i++) {
-                        if(answerList.get(i).equals(questionList.get(i).getAnswer())){
-                            scoreCount++;
-                        }
+                        Results results = new Results(questionList.get(i).getAnswer(), answerList.get(i));
+                        resultsList.add(results);
                     }
-                    String score = getString(R.string.final_score, scoreCount, questionList.size());
+
                     Intent intent = new Intent(getActivity(), ScoreActivity.class);
-                    intent.putExtra("Score", score);
+                    intent.putParcelableArrayListExtra("Results", resultsList);
                     startActivity(intent);
             }
         }

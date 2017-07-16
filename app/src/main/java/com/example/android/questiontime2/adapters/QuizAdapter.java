@@ -58,7 +58,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.ViewHolder> {
      * @param position
      */
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         Quiz quiz = quizList.get(position);
         int numQuestions = quiz.getQuestionList().size();
         GradientDrawable quizIconCircle = (GradientDrawable) holder.quizIconView.getBackground();

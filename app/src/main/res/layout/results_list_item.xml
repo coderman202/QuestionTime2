@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:padding="@dimen/standard_layout_margin"
+    android:weightSum="2.7">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/right_color"
+            android:textAppearance="@style/StandardFontStyle"
+            android:textSize="@dimen/results_list_text_size"
+            android:paddingBottom="@dimen/appbar_padding_top"
+            tools:text="test"/>
+
+        <TextView
+            android:id="@+id/user_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/wrong_color"
+            android:textAppearance="@style/StandardFontStyle"
+            android:textSize="@dimen/results_list_text_size"
+            tools:text="test"
+            android:gravity="start"/>
+
+    </LinearLayout>
+
+
+
+    <ImageView
+        android:id="@+id/right_wrong"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        tools:src="@drawable/right"
+        android:layout_gravity="end|center_vertical"
+        android:layout_weight="0.7"/>
+
+</LinearLayout>

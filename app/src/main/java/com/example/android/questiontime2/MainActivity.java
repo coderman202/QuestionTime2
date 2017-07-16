@@ -13,8 +13,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    @BindView(R.id.open_quiz_list)
-    TextView openQuizList;
+    @BindView(R.id.open_quiz_list) TextView openQuizList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

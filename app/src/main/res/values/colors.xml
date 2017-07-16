@@ -10,6 +10,9 @@
 
     <color name="button_color">#1A237E</color>
 
+    <color name="right_color">#558B2F</color>
+    <color name="wrong_color">#E53935</color>
+
     <!--Selection of random colours for the quiz icon-->
     <color name="circle1">#43A047</color>
     <color name="circle2">#D81B60</color>

@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/standard_layout_margin"
-    tools:context="com.example.android.questiontime2.ScoreActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/standard_layout_margin"
+        tools:context="com.example.android.questiontime2.ScoreActivity">
 
-    <TextView
-        style="@style/WelcomeScreenStyle"
-        android:id="@+id/final_score"
-        android:text="@string/final_score"/>
+        <TextView
+            style="@style/WelcomeScreenStyle"
+            android:id="@+id/final_score"
+            android:text="@string/final_score"/>
 
-    <TextView
-        style="@style/WelcomeScreenStyle"
-        android:id="@+id/replay"
-        android:text="@string/play_again"
-        android:textColor="@color/white_font_color"
-        android:background="@color/button_color"
-        android:layout_centerInParent="true"
-        android:drawableEnd="@drawable/replay"/>
-</RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/results_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/standard_layout_margin"
+            android:paddingBottom="@dimen/standard_layout_margin"/>
+
+        <TextView
+            android:id="@+id/replay"
+            style="@style/WelcomeScreenStyle"
+            android:paddingTop="@dimen/standard_layout_margin"
+            android:background="@color/button_color"
+            android:drawableEnd="@drawable/replay"
+            android:text="@string/play_again"
+            android:textColor="@color/white_font_color"/>
+    </LinearLayout>
+</ScrollView>

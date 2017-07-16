@@ -3,6 +3,7 @@ package com.example.android.questiontime2.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -63,6 +64,10 @@ public class Question implements Parcelable {
 
     public Type getQuestionType() {
         return questionType;
+    }
+
+    public void shuffleOptions(){
+        Collections.shuffle(this.options);
     }
 
     @Override
