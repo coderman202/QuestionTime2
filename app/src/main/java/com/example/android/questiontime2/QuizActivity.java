@@ -19,6 +19,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.android.questiontime2.adapters.QuizPagerAdapter;
 import com.example.android.questiontime2.adapters.QuizQuestionPagerAdapter;
 import com.example.android.questiontime2.model.Question;
 import com.example.android.questiontime2.model.Quiz;
@@ -43,6 +44,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private QuizQuestionPagerAdapter quizQuestionPagerAdapter;
+    private QuizPagerAdapter quizPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -63,9 +65,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        quizQuestionPagerAdapter = new QuizQuestionPagerAdapter(this, getSupportFragmentManager());
 
         Bundle bundle = getIntent().getExtras();
         quiz = bundle.getParcelable("Quiz");
@@ -78,9 +77,15 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         // Set the default answer to be changed when an option is selected in the radio group.
         while(answerList.size() < questionList.size()) answerList.add("No answer");
 
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        //quizQuestionPagerAdapter = new QuizQuestionPagerAdapter(this, getSupportFragmentManager());
+        quizPagerAdapter = new QuizPagerAdapter(this, getSupportFragmentManager());
+
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.quiz_container);
-        mViewPager.setAdapter(quizQuestionPagerAdapter);
+        mViewPager.setAdapter(quizPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);

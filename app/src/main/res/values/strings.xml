@@ -16,6 +16,8 @@
 
     <string name="play_again">Choose another quiz and play again?</string>
 
+    <string name="page_title">Question <xliff:g name="tab_number" example="2">%d</xliff:g></string>
+
     <string name="question_mark">\?</string>
     <string name="num_questions"><xliff:g name="question_count" example="10">%d</xliff:g>\nQuestions</string>
 
