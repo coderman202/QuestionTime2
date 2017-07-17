@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +49,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     public static List<Fragment> fragmentList = new ArrayList<>();
 
+    FragmentManager fragmentManager = getSupportFragmentManager();
+
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -84,11 +87,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
             // Create the adapter that will return a fragment for each of the three
             // primary sections of the activity.
-            quizPagerAdapter = new QuizPagerAdapter(this, getSupportFragmentManager());
+            quizPagerAdapter = new QuizPagerAdapter(this, fragmentManager);
 
             for (int i = 0; i < questionList.size(); i++) {
                 quizPagerAdapter.addFragment(PlaceholderFragment.newInstance(i + 1));
-
             }
 
             fragmentList = quizPagerAdapter.getFragmentList();
@@ -135,7 +137,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onSaveInstanceState(Bundle outState){
         for (int i = 0; i < fragmentList.size(); i++) {
-            getSupportFragmentManager().putFragment(outState,"fragment" + i, fragmentList.get(i));
+            fragmentManager.putFragment(outState,"fragment" + i, fragmentList.get(i));
         }
 
     }
@@ -144,7 +146,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         int i = 0;
 
         while(getSupportFragmentManager().getFragment(inState,"fragment" + i)!= null){
-            quizPagerAdapter.addFragment(getSupportFragmentManager().getFragment(inState,"fragment" + i));
+            quizPagerAdapter.addFragment(fragmentManager.getFragment(inState,"fragment" + i));
         }
     }
 
