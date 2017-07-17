@@ -2,8 +2,7 @@ package com.example.android.questiontime2.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -21,15 +20,19 @@ import java.util.List;
  *
  */
 
-public class QuizPagerAdapter extends PagerAdapter {
+public class QuizPagerAdapter extends FragmentStatePagerAdapter {
 
     private FragmentManager fragmentManager;
     private QuizActivity quizActivity;
     private List<Fragment> fragmentList = new ArrayList<>();
 
     public QuizPagerAdapter(QuizActivity quizActivity, FragmentManager fm){
+        super(fm);
         fragmentManager = fm;
         this.quizActivity = quizActivity;
+        if(fragmentManager.getFragments() != null){
+            fragmentList = fragmentManager.getFragments();
+        }
     }
 
     public List<Fragment> getFragmentList() {
@@ -37,26 +40,26 @@ public class QuizPagerAdapter extends PagerAdapter {
     }
 
     public void addFragment(Fragment fragment) {
-        this. fragmentList.add(fragment);
+        this.fragmentList.add(fragment);
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        assert(0 <= position && position < fragmentList.size());
+        /*assert(0 <= position && position < fragmentList.size());
         FragmentTransaction trans = fragmentManager.beginTransaction();
         trans.remove(fragmentList.get(position));
         trans.commit();
-        fragmentList.remove(position);
+        fragmentList.remove(position);*/
     }
 
-    @Override
+    /*@Override
     public Fragment instantiateItem(ViewGroup container, int position){
         Fragment fragment = getItem(position);
         FragmentTransaction trans = fragmentManager.beginTransaction();
         trans.add(container.getId(),fragment,"fragment:"+position);
         trans.commit();
         return fragment;
-    }
+    }*/
 
     @Override
     public CharSequence getPageTitle(int position) {
@@ -74,11 +77,45 @@ public class QuizPagerAdapter extends PagerAdapter {
     }
 
     public Fragment getItem(int position){
-        assert(0 <= position && position < fragmentList.size());
-        if(fragmentList.get(position) == null){
+        /*if(fragmentList.get(position) == null){
             fragmentList.add(position, QuizActivity.PlaceholderFragment.newInstance(position + 1));
-        }
+        }*/
         return fragmentList.get(position);
     }
+
+    /*@Override
+    public void notifyDataSetChanged() {
+        List<Fragment> oldFragments = new ArrayList<>(fragmentList);
+        List<Fragment.SavedState> oldStates = new ArrayList<>();
+        for (int i = 0; i < getCount(); i++) {
+            if (i < fragmentList.size()) {
+                Fragment f = fragmentList.get(i);
+                if (f != null) {
+                    int newPosition = getItemPosition(f);
+                    if (newPosition == POSITION_UNCHANGED || newPosition == i) {
+                    } else if (newPosition == POSITION_NONE) {
+                        if (i < mSavedState.size()) {
+                            mSavedState.set(i, null);
+                        }
+                        fragmentList.set(i, null);
+                    } else {
+                        while (i >= fragmentList.size()) {
+                            fragmentList.add(null);
+                        }
+                        if (oldStates.size() > i) {
+                            mSavedState.set(newPosition, oldStates.get(i));
+                        }
+                        fragmentList.set(newPosition, oldFragments.get(i));
+                    }
+                } else {
+        /*
+         * No Fragment but that's possible there's savedState and position has
+         * changed.
+         */
+            /*    }
+            }
+        }
+        super.notifyDataSetChanged();
+    }*/
 
 }

@@ -3,16 +3,16 @@ package com.example.android.questiontime2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,7 +21,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.android.questiontime2.adapters.QuizPagerAdapter;
-import com.example.android.questiontime2.adapters.QuizQuestionPagerAdapter;
 import com.example.android.questiontime2.model.Question;
 import com.example.android.questiontime2.model.Quiz;
 import com.example.android.questiontime2.model.Results;
@@ -34,7 +33,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class QuizActivity extends AppCompatActivity implements View.OnClickListener {
+public class QuizActivity extends AppCompatActivity{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -44,12 +43,17 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private QuizQuestionPagerAdapter quizQuestionPagerAdapter;
-    private static QuizPagerAdapter quizPagerAdapter;
+    QuizPagerAdapter quizPagerAdapter;
 
-    public static List<Fragment> fragmentList = new ArrayList<>();
+    List<Fragment> fragmentList = new ArrayList<>();
 
-    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentManager fragmentManager;
+
+    FragmentTransaction fragmentTransaction;
+
+    public static String FRAGMENT_SIZE_KEY = "FragmentList Size";
+
+
 
 
     /**
@@ -73,6 +77,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        fragmentManager = getSupportFragmentManager();
+
         if(savedInstanceState == null){
             Bundle bundle = getIntent().getExtras();
             quiz = bundle.getParcelable("Quiz");
@@ -83,7 +89,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             QuizUtilities.shuffleAllQuestionsOptions(questionList);
 
             // Set the default answer to be changed when an option is selected in the radio group.
-            while(answerList.size() < questionList.size()) answerList.add("No answer");
+            while(answerList.size() < questionList.size()) answerList.add(getString(R.string.no_answer));
 
             // Create the adapter that will return a fragment for each of the three
             // primary sections of the activity.
@@ -93,8 +99,20 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 quizPagerAdapter.addFragment(PlaceholderFragment.newInstance(i + 1));
             }
 
-            fragmentList = quizPagerAdapter.getFragmentList();
         }
+        else{
+            // Create the adapter that will return a fragment for each of the three
+            // primary sections of the activity.
+            quizPagerAdapter = new QuizPagerAdapter(this, fragmentManager);
+
+            int i =  0;
+            while(fragmentManager.getFragment(savedInstanceState,"fragment" + i)!= null){
+                quizPagerAdapter.addFragment(fragmentManager.getFragment(savedInstanceState,"fragment" + i));
+            }
+        }
+
+
+        fragmentList = quizPagerAdapter.getFragmentList();
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.quiz_container);
@@ -106,46 +124,19 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View view){
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_quiz, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
     public void onSaveInstanceState(Bundle outState){
         for (int i = 0; i < fragmentList.size(); i++) {
-            fragmentManager.putFragment(outState,"fragment" + i, fragmentList.get(i));
+            if(fragmentList.get(i).isAdded()){
+                fragmentManager.putFragment(outState,"fragment" + i, fragmentList.get(i));
+            }
         }
-
+        outState.putInt(FRAGMENT_SIZE_KEY, fragmentList.size());
     }
     @Override
     public void onRestoreInstanceState(Bundle inState){
         int i = 0;
 
-        while(getSupportFragmentManager().getFragment(inState,"fragment" + i)!= null){
+        while(fragmentManager.getFragment(inState,"fragment" + i)!= null){
             quizPagerAdapter.addFragment(fragmentManager.getFragment(inState,"fragment" + i));
         }
     }
@@ -181,6 +172,12 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
             return fragment;
+        }
+
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setRetainInstance(true);
         }
 
         @Override

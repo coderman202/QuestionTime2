@@ -48,5 +48,6 @@
 
     <!--CONTENT DESCRIPTION STRINGS-->
     <string name="submit_button">Press this button to submit your answers</string>
+    <string name="no_answer">No Answer</string>
 
 </resources>
