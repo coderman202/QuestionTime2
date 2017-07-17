@@ -64,34 +64,35 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_quiz);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Bundle bundle = getIntent().getExtras();
-        quiz = bundle.getParcelable("Quiz");
+        if(savedInstanceState == null){
+            Bundle bundle = getIntent().getExtras();
+            quiz = bundle.getParcelable("Quiz");
 
-        // Shuffle all the questions and their options up.
-        questionList = quiz.getQuestionList();
-        Collections.shuffle(questionList);
-        QuizUtilities.shuffleAllQuestionsOptions(questionList);
+            // Shuffle all the questions and their options up.
+            questionList = quiz.getQuestionList();
+            Collections.shuffle(questionList);
+            QuizUtilities.shuffleAllQuestionsOptions(questionList);
 
-        // Set the default answer to be changed when an option is selected in the radio group.
-        while(answerList.size() < questionList.size()) answerList.add("No answer");
+            // Set the default answer to be changed when an option is selected in the radio group.
+            while(answerList.size() < questionList.size()) answerList.add("No answer");
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        //quizQuestionPagerAdapter = new QuizQuestionPagerAdapter(this, getSupportFragmentManager());
-        quizPagerAdapter = new QuizPagerAdapter(this, getSupportFragmentManager());
+            // Create the adapter that will return a fragment for each of the three
+            // primary sections of the activity.
+            quizPagerAdapter = new QuizPagerAdapter(this, getSupportFragmentManager());
 
-        for (int i = 0; i < questionList.size(); i++) {
-            quizPagerAdapter.addFragment(PlaceholderFragment.newInstance(i + 1));
+            for (int i = 0; i < questionList.size(); i++) {
+                quizPagerAdapter.addFragment(PlaceholderFragment.newInstance(i + 1));
 
+            }
+
+            fragmentList = quizPagerAdapter.getFragmentList();
         }
-
-        fragmentList = quizPagerAdapter.getFragmentList();
-
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.quiz_container);
