@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import com.example.android.questiontime2.QuizActivity;
 import com.example.android.questiontime2.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Reggie on 17/07/2017.
  * A custom pager adapter to handle screen rotation better.
@@ -21,22 +24,29 @@ import com.example.android.questiontime2.R;
 public class QuizPagerAdapter extends PagerAdapter {
 
     private FragmentManager fragmentManager;
-    private Fragment[] fragments;
     private QuizActivity quizActivity;
+    private List<Fragment> fragmentList = new ArrayList<>();
 
     public QuizPagerAdapter(QuizActivity quizActivity, FragmentManager fm){
         fragmentManager = fm;
         this.quizActivity = quizActivity;
-        fragments = new Fragment[quizActivity.quiz.getQuestionList().size()];
+    }
+
+    public List<Fragment> getFragmentList() {
+        return fragmentList;
+    }
+
+    public void addFragment(Fragment fragment) {
+        this. fragmentList.add(fragment);
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        assert(0 <= position && position < fragments.length);
+        assert(0 <= position && position < fragmentList.size());
         FragmentTransaction trans = fragmentManager.beginTransaction();
-        trans.remove(fragments[position]);
+        trans.remove(fragmentList.get(position));
         trans.commit();
-        fragments[position] = null;
+        fragmentList.remove(position);
     }
 
     @Override
@@ -55,7 +65,7 @@ public class QuizPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return fragments.length;
+        return fragmentList.size();
     }
 
     @Override
@@ -64,11 +74,11 @@ public class QuizPagerAdapter extends PagerAdapter {
     }
 
     public Fragment getItem(int position){
-        assert(0 <= position && position < fragments.length);
-        if(fragments[position] == null){
-            fragments[position] = QuizActivity.PlaceholderFragment.newInstance(position + 1);
+        assert(0 <= position && position < fragmentList.size());
+        if(fragmentList.get(position) == null){
+            fragmentList.add(position, QuizActivity.PlaceholderFragment.newInstance(position + 1));
         }
-        return fragments[position];
+        return fragmentList.get(position);
     }
 
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="standard_layout_margin">16dp</dimen>
+
+
+    <!--DIMENS FOR THE QUIZ LIST ITEMS AND CHILD VIEWS-->
+    <dimen name="quiz_list_item_view_padding">8dp</dimen>
+    <dimen name="quiz_list_item_padding_bottom">8dp</dimen>
+    <dimen name="quiz_item_text_size">20sp</dimen>
+    <dimen name="quiz_list_item_num_questions_text_size">15sp</dimen>
+
+    <dimen name="quiz_list_item_divider_width">1dp</dimen>
+    <dimen name="quiz_list_item_divider_margin">4dp</dimen>
+
+    <!--DIMENS FOR THE QUIZ ACTIVITY-->
+    <dimen name="radio_button_padding">8dp</dimen>
+    <dimen name="option_text_size">14sp</dimen>
+    <dimen name="question_text_size">16sp</dimen>
+
+    <dimen name="options_margin_bottom">24dp</dimen>
+
+    <!--DIMENS FOR THE RESULTS LIST-->
+    <dimen name="results_list_text_size">15sp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+
+
+</resources>

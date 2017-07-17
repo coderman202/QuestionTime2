@@ -44,7 +44,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private QuizQuestionPagerAdapter quizQuestionPagerAdapter;
-    private QuizPagerAdapter quizPagerAdapter;
+    private static QuizPagerAdapter quizPagerAdapter;
+
+    public static List<Fragment> fragmentList = new ArrayList<>();
+
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -81,6 +84,13 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         // primary sections of the activity.
         //quizQuestionPagerAdapter = new QuizQuestionPagerAdapter(this, getSupportFragmentManager());
         quizPagerAdapter = new QuizPagerAdapter(this, getSupportFragmentManager());
+
+        for (int i = 0; i < questionList.size(); i++) {
+            quizPagerAdapter.addFragment(PlaceholderFragment.newInstance(i + 1));
+
+        }
+
+        fragmentList = quizPagerAdapter.getFragmentList();
 
 
         // Set up the ViewPager with the sections adapter.
@@ -119,6 +129,24 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        for (int i = 0; i < fragmentList.size(); i++) {
+            getSupportFragmentManager().putFragment(outState,"fragment" + i, fragmentList.get(i));
+        }
+
+    }
+    @Override
+    public void onRestoreInstanceState(Bundle inState){
+        int i = 0;
+
+        while(getSupportFragmentManager().getFragment(inState,"fragment" + i)!= null){
+            quizPagerAdapter.addFragment(getSupportFragmentManager().getFragment(inState,"fragment" + i));
+        }
+    }
+
 
     /**
      * A placeholder fragment containing a simple view.
