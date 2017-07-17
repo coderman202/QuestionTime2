@@ -33,30 +33,12 @@ public class Type implements Parcelable {
     }
 
     /**
-     * Sets name.
-     *
-     * @param name the name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Gets instructions.
      *
      * @return the instructions
      */
     public String getInstructions() {
         return instructions;
-    }
-
-    /**
-     * Sets instructions.
-     *
-     * @param instructions the instructions
-     */
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
     }
 
     @Override

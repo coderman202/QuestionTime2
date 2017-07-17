@@ -34,30 +34,12 @@ public class Quiz implements Parcelable {
     }
 
     /**
-     * Sets quiz name.
-     *
-     * @param quizName the quiz name
-     */
-    public void setQuizName(String quizName) {
-        this.quizName = quizName;
-    }
-
-    /**
      * Gets question list.
      *
      * @return the question list
      */
     public List<Question> getQuestionList() {
         return questionList;
-    }
-
-    /**
-     * Sets question list.
-     *
-     * @param questionList the question list
-     */
-    public void setQuestionList(List<Question> questionList) {
-        this.questionList = questionList;
     }
 
     @Override

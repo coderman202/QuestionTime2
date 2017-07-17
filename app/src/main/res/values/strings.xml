@@ -9,7 +9,7 @@
         Press here to choose your quiz and try get them all right. Good luck!
     </string>
 
-    <string name="final_score">
+    <string name="final_score" tools:ignore="PluralsCandidate">
         You scored <xliff:g name="score_count" example="7">%d</xliff:g>
         out of <xliff:g name="question_count" example="10">%d</xliff:g>
     </string>
@@ -42,9 +42,10 @@
     <string name="keyboard_hide_exception">Error hiding keyboard</string>
     <string name="malformed_url_exception">Problem with the thumbnail URL</string>
     <string name="io_exception">Unknown IO exception</string>
+
+
     <string name="title_activity_quiz">QuizActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+
 
     <!--CONTENT DESCRIPTION STRINGS-->
     <string name="submit_button">Press this button to submit your answers</string>

@@ -8,7 +8,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -43,19 +42,11 @@ public class QuizActivity extends AppCompatActivity{
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    QuizPagerAdapter quizPagerAdapter;
+    private static QuizPagerAdapter quizPagerAdapter;
 
-    List<Fragment> fragmentList = new ArrayList<>();
+    public static List<Fragment> fragmentList = new ArrayList<>();
 
-    FragmentManager fragmentManager;
-
-    FragmentTransaction fragmentTransaction;
-
-    public static String FRAGMENT_SIZE_KEY = "FragmentList Size";
-
-
-
-
+    FragmentManager fragmentManager = getSupportFragmentManager();
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -66,8 +57,6 @@ public class QuizActivity extends AppCompatActivity{
 
     public static List<String> answerList = new ArrayList<>();
 
-    public static int scoreCount = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,9 +66,11 @@ public class QuizActivity extends AppCompatActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        fragmentManager = getSupportFragmentManager();
+        if (savedInstanceState != null) {
+            int i = 0;
+        }
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             Bundle bundle = getIntent().getExtras();
             quiz = bundle.getParcelable("Quiz");
 
@@ -89,58 +80,30 @@ public class QuizActivity extends AppCompatActivity{
             QuizUtilities.shuffleAllQuestionsOptions(questionList);
 
             // Set the default answer to be changed when an option is selected in the radio group.
-            while(answerList.size() < questionList.size()) answerList.add(getString(R.string.no_answer));
+            while (answerList.size() < questionList.size())
+                answerList.add(getString(R.string.no_answer));
 
             // Create the adapter that will return a fragment for each of the three
             // primary sections of the activity.
-            quizPagerAdapter = new QuizPagerAdapter(this, fragmentManager);
+            quizPagerAdapter = new QuizPagerAdapter(fragmentManager);
 
             for (int i = 0; i < questionList.size(); i++) {
                 quizPagerAdapter.addFragment(PlaceholderFragment.newInstance(i + 1));
             }
 
-        }
-        else{
-            // Create the adapter that will return a fragment for each of the three
-            // primary sections of the activity.
-            quizPagerAdapter = new QuizPagerAdapter(this, fragmentManager);
-
-            int i =  0;
-            while(fragmentManager.getFragment(savedInstanceState,"fragment" + i)!= null){
-                quizPagerAdapter.addFragment(fragmentManager.getFragment(savedInstanceState,"fragment" + i));
-            }
+            fragmentList = quizPagerAdapter.getFragmentList();
         }
 
 
-        fragmentList = quizPagerAdapter.getFragmentList();
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.quiz_container);
         mViewPager.setAdapter(quizPagerAdapter);
+        mViewPager.setOffscreenPageLimit(14);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
     }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState){
-        for (int i = 0; i < fragmentList.size(); i++) {
-            if(fragmentList.get(i).isAdded()){
-                fragmentManager.putFragment(outState,"fragment" + i, fragmentList.get(i));
-            }
-        }
-        outState.putInt(FRAGMENT_SIZE_KEY, fragmentList.size());
-    }
-    @Override
-    public void onRestoreInstanceState(Bundle inState){
-        int i = 0;
-
-        while(fragmentManager.getFragment(inState,"fragment" + i)!= null){
-            quizPagerAdapter.addFragment(fragmentManager.getFragment(inState,"fragment" + i));
-        }
-    }
-
 
     /**
      * A placeholder fragment containing a simple view.
