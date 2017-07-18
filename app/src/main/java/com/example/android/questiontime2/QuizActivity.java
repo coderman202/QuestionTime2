@@ -41,7 +41,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class QuizActivity extends AppCompatActivity{
+public class QuizActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -75,10 +75,6 @@ public class QuizActivity extends AppCompatActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (savedInstanceState != null) {
-            int i = 0;
-        }
-
         if (savedInstanceState == null) {
             Bundle bundle = getIntent().getExtras();
             quiz = bundle.getParcelable("Quiz");
@@ -104,8 +100,6 @@ public class QuizActivity extends AppCompatActivity{
             fragmentList = quizPagerAdapter.getFragmentList();
         }
 
-
-
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.quiz_container);
         mViewPager.setAdapter(quizPagerAdapter);
@@ -118,12 +112,15 @@ public class QuizActivity extends AppCompatActivity{
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment implements View.OnClickListener{
+    public static class PlaceholderFragment extends Fragment implements View.OnClickListener {
 
         // For the RadioButton questions
-        @BindView(R.id.question) TextView questionView;
-        @BindView(R.id.options_group) RadioGroup optionsGroup;
-        @BindView(R.id.submit_button) ImageView submitButton;
+        @BindView(R.id.question)
+        TextView questionView;
+        @BindView(R.id.options_group)
+        RadioGroup optionsGroup;
+        @BindView(R.id.submit_button)
+        ImageView submitButton;
 
         // For the EditText questions
         @BindView(R.id.text_answer)
@@ -210,7 +207,7 @@ public class QuizActivity extends AppCompatActivity{
 
         private void initRadioButtonsQuestion(final List<String> options) {
             optionsGroup.setVisibility(View.VISIBLE);
-            for(int i = 0; i < options.size(); i++) {
+            for (int i = 0; i < options.size(); i++) {
                 RadioButton option = (RadioButton) optionsGroup.getChildAt(i);
                 option.setText(options.get(i));
             }
@@ -219,7 +216,7 @@ public class QuizActivity extends AppCompatActivity{
                 @Override
                 public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                     List<String> answers = new ArrayList<>();
-                    switch(checkedId){
+                    switch (checkedId) {
                         case R.id.option1:
                             answers.add(options.get(0));
                             break;
@@ -282,8 +279,8 @@ public class QuizActivity extends AppCompatActivity{
         }
 
         @Override
-        public void onClick(View view){
-            switch (view.getId()){
+        public void onClick(View view) {
+            switch (view.getId()) {
                 case R.id.submit_button:
                     ArrayList<Results> resultsList = new ArrayList<>();
                     for (int i = 0; i < questionList.size(); i++) {

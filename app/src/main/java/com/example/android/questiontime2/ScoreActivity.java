@@ -20,15 +20,18 @@ import butterknife.ButterKnife;
 
 public class ScoreActivity extends AppCompatActivity implements View.OnClickListener {
 
-    @BindView(R.id.replay) TextView replayView;
-    @BindView(R.id.final_score) TextView finalScoreView;
-    @BindView(R.id.results_list) RecyclerView resultsListView;
+    @BindView(R.id.replay)
+    TextView replayView;
+    @BindView(R.id.final_score)
+    TextView finalScoreView;
+    @BindView(R.id.results_list)
+    RecyclerView resultsListView;
 
     ResultsAdapter adapter;
 
     List<Results> resultsList;
 
-    int score = 0;
+    int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +42,8 @@ public class ScoreActivity extends AppCompatActivity implements View.OnClickList
 
         resultsList = getIntent().getParcelableArrayListExtra("Results");
 
-        for (Results results:resultsList) {
-            if(results.isCorrect()){
+        for (Results results : resultsList) {
+            if (results.isCorrect()) {
                 score++;
             }
         }
@@ -60,8 +63,8 @@ public class ScoreActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.replay:
                 Intent intent = new Intent(this, QuizListActivity.class);
                 startActivity(intent);

@@ -34,7 +34,7 @@ public class Results implements Parcelable {
         return TextUtils.join(", ", userAnswer);
     }
 
-    public boolean isCorrect(){
+    public boolean isCorrect() {
         Collections.sort(correctAnswer);
         Collections.sort(userAnswer);
         return this.correctAnswer.equals(this.userAnswer);

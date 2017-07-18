@@ -28,12 +28,15 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
     private List<Results> resultsList;
     private Context context;
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.answer) TextView answerView;
-        @BindView(R.id.user_answer) TextView userAnswerView;
-        @BindView(R.id.right_wrong) ImageView rightWrongView;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.answer)
+        TextView answerView;
+        @BindView(R.id.user_answer)
+        TextView userAnswerView;
+        @BindView(R.id.right_wrong)
+        ImageView rightWrongView;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
@@ -41,7 +44,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
 
     }
 
-    public ResultsAdapter(Context context, List<Results> resultsList){
+    public ResultsAdapter(Context context, List<Results> resultsList) {
         this.context = context;
         this.resultsList = resultsList;
     }
@@ -49,6 +52,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
 
     /**
      * Setting the views for all the elements in the RecyclerView item.
+     *
      * @param holder
      * @param position
      */
@@ -60,7 +64,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
         holder.userAnswerView.setText(results.getUserAnswer());
 
         int drawable = R.drawable.wrong;
-        if(results.isCorrect()){
+        if (results.isCorrect()) {
             drawable = R.drawable.right;
             holder.userAnswerView.setTextColor(ContextCompat.getColor(context, R.color.right_color));
         }
@@ -69,12 +73,12 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
     }
 
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return resultsList.size();
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.results_list_item, parent, false);
         return new ViewHolder(view);
     }

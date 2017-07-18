@@ -66,7 +66,7 @@ public class Question implements Parcelable {
         return questionType;
     }
 
-    public void shuffleOptions(){
+    public void shuffleOptions() {
         Collections.shuffle(this.options);
     }
 

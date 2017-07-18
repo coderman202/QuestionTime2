@@ -71,7 +71,7 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
     //And any useful pre-created views
     private static final String TOP_SCORE_LIST_VIEW = "TopScoresList";
 
-    public QuestionTimeDB(Context context){
+    public QuestionTimeDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -94,6 +94,7 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
      * the onCreate method, along with the insert_data.sql file. n the onUpgrade method, the
      * drop_tables.sql file can be called along with the create and insert scripts. My resource for
      * this method is found below.
+     *
      * @param context   The context
      * @param db        The db that the script is run on
      * @param sqlScript The sql script
@@ -115,7 +116,7 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
             inputStream.close();
 
             String[] script = outputStream.toString().split(";");
-            for (String sqlStatement:script) {
+            for (String sqlStatement : script) {
                 sqlStatement = sqlStatement.trim();
                 if (sqlStatement.length() > 0) {
                     db.execSQL(sqlStatement + ";");
@@ -152,7 +153,7 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
         return null;
     }
 
-    public List<Question> getQuestionsByQuiz(int quizID){
+    public List<Question> getQuestionsByQuiz(int quizID) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query =
                 "SELECT " + QUESTION_TABLE_NAME + "." + QUESTION_COLUMN_TEXT + ", " +
@@ -165,7 +166,7 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
                         QUESTION_TABLE_NAME + "." + QUESTION_COLUMN_ID + ";";
         Cursor c = db.rawQuery(query, null);
         List<Question> questionList = new ArrayList<>();
-        if(c != null){
+        if (c != null) {
             c.moveToFirst();
             for (int i = 0; i < c.getCount(); i++) {
                 String question = c.getString(c.getColumnIndex(QUESTION_COLUMN_TEXT));
@@ -188,11 +189,11 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
         return null;
     }
 
-    public String getTopic(int id){
+    public String getTopic(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query =
                 "SELECT * FROM " + TOPIC_TABLE_NAME + " WHERE "
-                + TOPIC_COLUMN_ID + " = " + id + ";";
+                        + TOPIC_COLUMN_ID + " = " + id + ";";
         Cursor c = db.rawQuery(query, null);
         c.moveToFirst();
         String topicName = c.getString(c.getColumnIndex(TOPIC_COLUMN_NAME));
@@ -200,13 +201,13 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
         return topicName;
     }
 
-    public Type getType(int id){
+    public Type getType(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query =
                 "SELECT * FROM " + TYPE_TABLE_NAME + " WHERE "
                         + TYPE_COLUMN_ID + " = " + id + ";";
         Cursor c = db.rawQuery(query, null);
-        if(c != null) {
+        if (c != null) {
             c.moveToFirst();
             String typeName = c.getString(c.getColumnIndex(TYPE_COLUMN_NAME));
             String typeInstructions = c.getString(c.getColumnIndex(TYPE_COLUMN_INSTRUCTION));
@@ -217,14 +218,14 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
         return null;
     }
 
-    public List<String> getOptionsByQuestion(int questionID){
+    public List<String> getOptionsByQuestion(int questionID) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query =
                 "SELECT * FROM " + OPTIONS_TABLE_NAME + " WHERE " +
-                OPTIONS_COLUMN_QUESTION + " = " + questionID + ";";
+                        OPTIONS_COLUMN_QUESTION + " = " + questionID + ";";
         List<String> optionsList = new ArrayList<>();
         Cursor c = db.rawQuery(query, null);
-        if(c != null){
+        if (c != null) {
             c.moveToFirst();
             for (int i = 0; i < c.getCount(); i++) {
                 String optionText = c.getString(c.getColumnIndex(OPTIONS_COLUMN_TEXT));
@@ -245,7 +246,7 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
                         " = " + questionID + " AND " + OPTIONS_COLUMN_IS_CORRECT + " = 1;";
         List<String> answerList = new ArrayList<>();
         Cursor c = db.rawQuery(query, null);
-        if(c != null){
+        if (c != null) {
             c.moveToFirst();
             for (int i = 0; i < c.getCount(); i++) {
                 String optionText = c.getString(c.getColumnIndex(OPTIONS_COLUMN_TEXT));
@@ -258,38 +259,4 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
         c.close();
         return null;
     }
-
-    //TODO: Create methods to add new questions and quizzes to db.
-
-    /*public void addNewQuestion(Question newQuestion){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String question = newQuestion.getQuestion();
-        String topic = newQuestion.getTopic();
-        List<String> optionList = newQuestion.getOptions();
-        String answer = newQuestion.getAnswerList();
-        Type type = newQuestion.getQuestionType();
-        int typeID = getTypeID(type.getName());
-
-        ContentValues insertValues = new ContentValues();
-        insertValues.put(QUESTION_COLUMN_TEXT, question);
-        insertValues.put(QUESTION_COLUMN_TOPIC, topic);
-        insertValues.put(QUESTION_COLUMN_TYPE, typeID);
-
-    }
-
-    public int getTypeID(String typeName){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query =
-                "SELECT * FROM " + TYPE_TABLE_NAME + " WHERE " + TYPE_COLUMN_NAME +
-                        " = " + typeName + ";";
-        Cursor c = db.rawQuery(query, null);
-        if(c != null) {
-            c.moveToFirst();
-            int typeID = c.getInt(c.getColumnIndex(TYPE_COLUMN_ID));
-            c.close();
-            return typeID;
-        }
-        c.close();
-        return 0;
-    }*/
 }

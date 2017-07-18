@@ -14,8 +14,8 @@ import java.util.List;
  * Created by Reggie on 17/07/2017.
  * A custom pager adapter to handle screen rotation better.
  * Solution code was adapted from here:
- * @see <a href="https://stackoverflow.com/a/21517213/6162963">Stackoverflow handling screen rotation with viewpager</a>
  *
+ * @see <a href="https://stackoverflow.com/a/21517213/6162963">Stackoverflow handling screen rotation with viewpager</a>
  */
 
 public class QuizPagerAdapter extends FragmentStatePagerAdapter {
@@ -58,7 +58,7 @@ public class QuizPagerAdapter extends FragmentStatePagerAdapter {
         return ((Fragment) fragment).getView() == view;
     }
 
-    public Fragment getItem(int position){
+    public Fragment getItem(int position) {
         return fragmentList.get(position);
     }
 

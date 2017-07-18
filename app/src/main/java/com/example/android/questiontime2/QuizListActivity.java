@@ -20,7 +20,8 @@ public class QuizListActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = QuizListActivity.class.getSimpleName();
 
-    @BindView(R.id.quiz_list) RecyclerView quizRecyclerView;
+    @BindView(R.id.quiz_list)
+    RecyclerView quizRecyclerView;
 
     private QuizAdapter quizAdapter;
     private List<Quiz> quizList;
@@ -39,6 +40,7 @@ public class QuizListActivity extends AppCompatActivity {
      * A method to initiate the quiz recycler view. Use a layout manager to set it to a vertical
      * orientation and use the HorizontalDividerItemDecoration Builder class to create a divider.
      * For more on the divider:
+     *
      * @see <a href="https://github.com/yqritc/RecyclerView-FlexibleDivider">RecyclerView-FlexibleDivider</a>
      */
     public void initQuizRecyclerView() {

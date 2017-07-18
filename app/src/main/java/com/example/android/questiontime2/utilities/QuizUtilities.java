@@ -11,10 +11,11 @@ import java.util.List;
 
 public final class QuizUtilities {
 
-    private QuizUtilities(){}
+    private QuizUtilities() {
+    }
 
-    public static void shuffleAllQuestionsOptions(List<Question> questionList){
-        for (Question question:questionList) {
+    public static void shuffleAllQuestionsOptions(List<Question> questionList) {
+        for (Question question : questionList) {
             question.shuffleOptions();
         }
     }

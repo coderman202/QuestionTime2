@@ -32,13 +32,17 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.ViewHolder> {
     private List<Quiz> quizList;
     private Context context;
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.quiz_name) TextView quizNameView;
-        @BindView(R.id.num_questions) TextView quizNumQuestions;
-        @BindView(R.id.quiz_icon) TextView quizIconView;
-        @BindView(R.id.quiz_list_item) LinearLayout layout;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.quiz_name)
+        TextView quizNameView;
+        @BindView(R.id.num_questions)
+        TextView quizNumQuestions;
+        @BindView(R.id.quiz_icon)
+        TextView quizIconView;
+        @BindView(R.id.quiz_list_item)
+        LinearLayout layout;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
@@ -46,7 +50,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.ViewHolder> {
 
     }
 
-    public QuizAdapter(Context context, List<Quiz> quizList){
+    public QuizAdapter(Context context, List<Quiz> quizList) {
         this.context = context;
         this.quizList = quizList;
     }
@@ -54,6 +58,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.ViewHolder> {
 
     /**
      * Setting the views for all the elements in the RecyclerView item.
+     *
      * @param holder
      * @param position
      */
@@ -83,19 +88,19 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.ViewHolder> {
     }
 
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return quizList.size();
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.quiz_list_item, parent, false);
         return new ViewHolder(view);
     }
 
-    public int getIconBgColor(){
+    public int getIconBgColor() {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 13);
-        switch (randomNum){
+        switch (randomNum) {
             case 0:
                 return ContextCompat.getColor(context, R.color.circle1);
             case 1:
