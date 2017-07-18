@@ -21,8 +21,8 @@ INSERT INTO Quiz (QuizName) VALUES
 ('Food and Drink Quiz'),
 ('Film and TV Quiz');
 
-INSERT INTO QuestionType (TypeName, TypeInstruction) VALUES ('Multiple Choice', 'Choose the correct answer.');
-INSERT INTO QuestionType (TypeName, TypeInstruction) VALUES ('True or False', 'Make the correct choice.');
+INSERT INTO QuestionType (TypeName, TypeInstruction) VALUES ('Multiple Choice', 'Choose the correct answerList.');
+INSERT INTO QuestionType (TypeName, TypeInstruction) VALUES ('One answer', 'Enter the correct answer.');
 INSERT INTO QuestionType (TypeName, TypeInstruction) VALUES ('Multiple Answers', 'Select all correct answers.');
 
 INSERT INTO Question (Question, TopicID, TypeID) VALUES ('How many teams are there in the English Premier League?',1, 1);
@@ -127,6 +127,12 @@ INSERT INTO Question (Question, TopicID, TypeID) VALUES ('On the hit show Seinfe
 INSERT INTO Question (Question, TopicID, TypeID) VALUES ('Which actor played the captain of the Enterprise in the television series "Star Trek the Next Generation"?',10, 1);
 INSERT INTO Question (Question, TopicID, TypeID) VALUES ('What are the names of the two Muppet characters that heckle the rest of the cast from their balcony seats?',10, 1);
 INSERT INTO Question (Question, TopicID, TypeID) VALUES ('How many fingers do the Simpsons cartoon characters have?',10, 1);
+INSERT INTO Question (Question, TopicID, TypeID) VALUES ('Choose the 3 types of blood cells.',7, 3);
+INSERT INTO Question (Question, TopicID, TypeID) VALUES ('Which of the following are trigonometric functions?',7, 3);
+INSERT INTO Question (Question, TopicID, TypeID) VALUES ('Which of the following are Simpsons characters?',7, 3);
+INSERT INTO Question (Question, TopicID, TypeID) VALUES ('Will you give this submission a great review?',7, 3);
+INSERT INTO Question (Question, TopicID, TypeID) VALUES ('What is President Obama''s first name?',7, 2);
+INSERT INTO Question (Question, TopicID, TypeID) VALUES ('Who played Han Solo in Star Wars?',7, 2);
 
 INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(1,'20',1);
 INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(1,'18',0);
@@ -536,6 +542,26 @@ INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(102,'Four',1);
 INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(102,'Five',0);
 INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(102,'Three',0);
 INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(102,'Six',0);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(103,'White Blood Cels',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(103,'Red Blood Cells',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(103,'Amoeba',0);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(103,'Platelets',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(104,'Sine',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(104,'Tango',0);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(104,'Cosine',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(104,'Sector',0);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(105,'Bart',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(105,'Maggie',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(105,'Homer',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(105,'Apu',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(106,'Yes',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(106,'Of course',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(106,'I will',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(106,'Sure',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(107,'Barack',1);
+INSERT INTO Options (QuestionID, OptionText, IsCorrect) VALUES(108,'Harrison Ford',1);
+
+
 
 INSERT INTO QuestionQuiz (QuestionID, QuizID) VALUES(1, 1);
 INSERT INTO QuestionQuiz (QuestionID, QuizID) VALUES(2, 1);
@@ -639,3 +665,9 @@ INSERT INTO QuestionQuiz (QuestionID, QuizID) VALUES(99, 10);
 INSERT INTO QuestionQuiz (QuestionID, QuizID) VALUES(100, 10);
 INSERT INTO QuestionQuiz (QuestionID, QuizID) VALUES(101, 10);
 INSERT INTO QuestionQuiz (QuestionID, QuizID) VALUES(102, 10);
+INSERT INTO QuestionQuiz (QuestionID, QuizID) VALUES(103, 7);
+INSERT INTO QuestionQuiz (QuestionID, QuizID) VALUES(104, 7);
+INSERT INTO QuestionQuiz (QuestionID, QuizID) VALUES(105, 7);
+INSERT INTO QuestionQuiz (QuestionID, QuizID) VALUES(106, 7);
+INSERT INTO QuestionQuiz (QuestionID, QuizID) VALUES(107, 7);
+INSERT INTO QuestionQuiz (QuestionID, QuizID) VALUES(108, 7);

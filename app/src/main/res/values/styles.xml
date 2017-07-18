@@ -56,6 +56,13 @@
         <item name="android:textAppearance">@style/StandardFontStyle</item>
     </style>
 
+    <style name="CheckBoxOptionsStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:textSize">@dimen/option_text_size</item>
+        <item name="android:paddingTop">@dimen/radio_button_padding</item>
+        <item name="android:paddingBottom">@dimen/radio_button_padding</item>
+        <item name="android:textAppearance">@style/StandardFontStyle</item>
+    </style>
+
     <style name="OptionsStyle.QuestionStyle">
         <item name="android:textSize">@dimen/question_text_size</item>
         <item name="android:padding">0dp</item>

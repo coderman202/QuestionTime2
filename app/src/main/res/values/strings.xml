@@ -25,7 +25,7 @@
     <string name="placeholder_quiz_name">Sports Quiz</string>
     <string name="placeholder_num_questions">10\nQuestions</string>
     <string name="placeholder_question">What is the highest mountain in China?</string>
-    <string name="placeholes_answer">Mount Olympus</string>
+    <string name="placeholder_answer">Mount Olympus</string>
 
     <!--STRINGS FOR DEALING WITH EXCEPTIONS -->
     <string name="url_exception">Problem with the request URL</string>
@@ -50,5 +50,7 @@
     <!--CONTENT DESCRIPTION STRINGS-->
     <string name="submit_button">Press this button to submit your answers</string>
     <string name="no_answer">No Answer</string>
+    <string name="enter_answer">Enter answer here</string>
+    <string name="answer_aubmitted">Answer submitted swipe to next question or complete quiz.</string>
 
 </resources>

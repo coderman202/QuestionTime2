@@ -15,14 +15,14 @@ public class Question implements Parcelable {
     private String question;
     private String topic;
     private List<String> options;
-    private String answer;
+    private List<String> answerList;
     private Type questionType;
 
-    public Question(String question, String topic, List<String> options, String answer, Type questionType) {
+    public Question(String question, String topic, List<String> options, List<String> answerList, Type questionType) {
         this.question = question;
         this.topic = topic;
         this.options = options;
-        this.answer = answer;
+        this.answerList = answerList;
         this.questionType = questionType;
     }
 
@@ -54,12 +54,12 @@ public class Question implements Parcelable {
     }
 
     /**
-     * Gets answer.
+     * Gets answerList.
      *
-     * @return the answer
+     * @return the answerList
      */
-    public String getAnswer() {
-        return answer;
+    public List<String> getAnswerList() {
+        return answerList;
     }
 
     public Type getQuestionType() {
@@ -76,7 +76,7 @@ public class Question implements Parcelable {
                 "question='" + question + '\'' +
                 ", topic='" + topic + '\'' +
                 ", options=" + options +
-                ", answer='" + answer + '\'' +
+                ", answerList='" + answerList + '\'' +
                 ", questionType=" + questionType +
                 '}';
     }
@@ -91,7 +91,7 @@ public class Question implements Parcelable {
         dest.writeString(this.question);
         dest.writeString(this.topic);
         dest.writeStringList(this.options);
-        dest.writeString(this.answer);
+        dest.writeStringList(this.answerList);
         dest.writeParcelable(this.questionType, flags);
     }
 
@@ -99,7 +99,7 @@ public class Question implements Parcelable {
         this.question = in.readString();
         this.topic = in.readString();
         this.options = in.createStringArrayList();
-        this.answer = in.readString();
+        this.answerList = in.createStringArrayList();
         this.questionType = in.readParcelable(Type.class.getClassLoader());
     }
 

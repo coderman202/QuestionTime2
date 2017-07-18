@@ -26,7 +26,7 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
 
     private static final String LOG_TAG = QuestionTimeDB.class.getSimpleName();
     private static final String DATABASE_NAME = "QuestionTime.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     private Context context;
 
@@ -152,35 +152,6 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
         return null;
     }
 
-    public List<Question> getQuestionsByTopic(int topicID){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query =
-                "SELECT * FROM " + QUESTION_TABLE_NAME + " WHERE " +
-                QUESTION_COLUMN_TOPIC + " = " + topicID + ";";
-        Cursor c = db.rawQuery(query, null);
-        List<Question> questionList = new ArrayList<>();
-        if(c != null){
-            c.moveToFirst();
-            for (int i = 0; i < c.getCount(); i++) {
-                String question = c.getString(c.getColumnIndex(QUESTION_COLUMN_TEXT));
-                int questionID = c.getInt(c.getColumnIndex(QUESTION_COLUMN_ID));
-                int typeID = c.getInt(c.getColumnIndex(QUESTION_COLUMN_TYPE));
-
-                List<String> optionsList = getOptionsByQuestion(questionID);
-                String topic = getTopic(topicID);
-                String answer = getAnswerByQuestion(questionID);
-                Type type = getType(typeID);
-
-                questionList.add(new Question(question, topic, optionsList, answer, type));
-                c.moveToNext();
-            }
-            c.close();
-            return questionList;
-        }
-        c.close();
-        return null;
-    }
-
     public List<Question> getQuestionsByQuiz(int quizID){
         SQLiteDatabase db = this.getReadableDatabase();
         String query =
@@ -204,10 +175,10 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
 
                 List<String> optionsList = getOptionsByQuestion(questionID);
                 String topic = getTopic(topicID);
-                String answer = getAnswerByQuestion(questionID);
+                List<String> answerList = getAnswerByQuestion(questionID);
                 Type type = getType(typeID);
 
-                questionList.add(new Question(question, topic, optionsList, answer, type));
+                questionList.add(new Question(question, topic, optionsList, answerList, type));
                 c.moveToNext();
             }
             c.close();
@@ -240,7 +211,7 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
             String typeName = c.getString(c.getColumnIndex(TYPE_COLUMN_NAME));
             String typeInstructions = c.getString(c.getColumnIndex(TYPE_COLUMN_INSTRUCTION));
             c.close();
-            return new Type(typeName, typeInstructions);
+            return new Type(id, typeName, typeInstructions);
         }
         c.close();
         return null;
@@ -267,17 +238,22 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
         return null;
     }
 
-    public String getAnswerByQuestion(int questionID){
+    public List<String> getAnswerByQuestion(int questionID) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query =
                 "SELECT * FROM " + OPTIONS_TABLE_NAME + " WHERE " + OPTIONS_COLUMN_QUESTION +
                         " = " + questionID + " AND " + OPTIONS_COLUMN_IS_CORRECT + " = 1;";
+        List<String> answerList = new ArrayList<>();
         Cursor c = db.rawQuery(query, null);
         if(c != null){
             c.moveToFirst();
-            String optionText = c.getString(c.getColumnIndex(OPTIONS_COLUMN_TEXT));
+            for (int i = 0; i < c.getCount(); i++) {
+                String optionText = c.getString(c.getColumnIndex(OPTIONS_COLUMN_TEXT));
+                answerList.add(optionText);
+                c.moveToNext();
+            }
             c.close();
-            return optionText;
+            return answerList;
         }
         c.close();
         return null;
@@ -290,7 +266,7 @@ public class QuestionTimeDB extends SQLiteOpenHelper {
         String question = newQuestion.getQuestion();
         String topic = newQuestion.getTopic();
         List<String> optionList = newQuestion.getOptions();
-        String answer = newQuestion.getAnswer();
+        String answer = newQuestion.getAnswerList();
         Type type = newQuestion.getQuestionType();
         int typeID = getTypeID(type.getName());
 

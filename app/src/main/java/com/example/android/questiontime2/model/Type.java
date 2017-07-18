@@ -9,6 +9,7 @@ import android.os.Parcelable;
  */
 public class Type implements Parcelable {
 
+    private int typeID;
     private String name;
     private String instructions;
 
@@ -18,9 +19,14 @@ public class Type implements Parcelable {
      * @param name         the name
      * @param instructions the instructions
      */
-    public Type(String name, String instructions) {
+    public Type(int typeID, String name, String instructions) {
+        this.typeID = typeID;
         this.name = name;
         this.instructions = instructions;
+    }
+
+    public int getTypeID() {
+        return typeID;
     }
 
     /**
@@ -44,7 +50,8 @@ public class Type implements Parcelable {
     @Override
     public String toString() {
         return "Type{" +
-                "name='" + name + '\'' +
+                "typeID=" + typeID +
+                ", name='" + name + '\'' +
                 ", instructions='" + instructions + '\'' +
                 '}';
     }
@@ -56,24 +63,18 @@ public class Type implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.typeID);
         dest.writeString(this.name);
         dest.writeString(this.instructions);
     }
 
-    /**
-     * Instantiates a new Type.
-     *
-     * @param in the in
-     */
     protected Type(Parcel in) {
+        this.typeID = in.readInt();
         this.name = in.readString();
         this.instructions = in.readString();
     }
 
-    /**
-     * The constant CREATOR.
-     */
-    public static final Parcelable.Creator<Type> CREATOR = new Parcelable.Creator<Type>() {
+    public static final Creator<Type> CREATOR = new Creator<Type>() {
         @Override
         public Type createFromParcel(Parcel source) {
             return new Type(source);

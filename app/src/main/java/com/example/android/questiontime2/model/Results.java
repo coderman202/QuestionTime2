@@ -2,6 +2,10 @@ package com.example.android.questiontime2.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Reggie on 16/07/2017.
@@ -12,40 +16,27 @@ import android.os.Parcelable;
  */
 public class Results implements Parcelable {
 
-    private String correctAnswer;
+    private List<String> correctAnswer;
 
-    private String userAnswer;
+    private List<String> userAnswer;
 
-    /**
-     * Instantiates a new Results.
-     *
-     * @param correctAnswer the correct answer
-     * @param userAnswer    the user answer
-     */
-    public Results(String correctAnswer, String userAnswer) {
+    public Results(List<String> correctAnswer, List<String> userAnswer) {
         this.correctAnswer = correctAnswer;
         this.userAnswer = userAnswer;
     }
 
-    /**
-     * Gets correct answer.
-     *
-     * @return the correct answer
-     */
     public String getCorrectAnswer() {
-        return correctAnswer;
+        return TextUtils.join(", ", correctAnswer);
     }
 
-    /**
-     * Gets user answer.
-     *
-     * @return the user answer
-     */
+
     public String getUserAnswer() {
-        return userAnswer;
+        return TextUtils.join(", ", userAnswer);
     }
 
     public boolean isCorrect(){
+        Collections.sort(correctAnswer);
+        Collections.sort(userAnswer);
         return this.correctAnswer.equals(this.userAnswer);
     }
 
@@ -57,24 +48,16 @@ public class Results implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.correctAnswer);
-        dest.writeString(this.userAnswer);
+        dest.writeStringList(this.correctAnswer);
+        dest.writeStringList(this.userAnswer);
     }
 
-    /**
-     * Instantiates a new Results.
-     *
-     * @param in the in
-     */
     protected Results(Parcel in) {
-        this.correctAnswer = in.readString();
-        this.userAnswer = in.readString();
+        this.correctAnswer = in.createStringArrayList();
+        this.userAnswer = in.createStringArrayList();
     }
 
-    /**
-     * The constant CREATOR.
-     */
-    public static final Parcelable.Creator<Results> CREATOR = new Parcelable.Creator<Results>() {
+    public static final Creator<Results> CREATOR = new Creator<Results>() {
         @Override
         public Results createFromParcel(Parcel source) {
             return new Results(source);
